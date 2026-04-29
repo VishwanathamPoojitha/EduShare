@@ -1,0 +1,13 @@
+h1{
+  text-align: center;
+  margin: 150px;
+  
+}
+button{
+  display: block;
+  margin: 0 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid;
+  cursor: pointer;
+}

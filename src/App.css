@@ -1,0 +1,592 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.Main_Heading {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+
+  /* ✅ FIXED BACKGROUND */
+  background: url('./assets/banner.png')  no-repeat  right 20% ;
+  background-size: cover;
+height: 100vh;
+width: 100%;
+
+ 
+}
+
+/* 🔥 Overlay for transparency */
+.Main_Heading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+.title,
+.Navigate {
+  position: relative;
+  z-index: 1;
+}
+
+/* Title Styling */
+.title {
+  font-size: 2.5rem;
+  max-width: 700px;
+  line-height: 1.4;
+}
+
+/* Button Styling */
+.Navigate {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #de59ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.Navigate:hover {
+  background: #0fee98;
+  transform: scale(1.05);
+}
+
+/* Center button properly */
+.Navigate {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #de59ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  /* ✅ FIX */
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .Navigate {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Navigate {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+@media (max-width: 480px) {
+
+  .Navigate {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Main container */
+.auth_container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+
+  background-color:#dfddde;
+}
+
+.login_section , .register_section {
+  width: 350px;
+  
+}
+.login_section input , .register_section input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-style: none;
+  border-bottom: 1px solid black;
+
+  background:transparent ;
+  
+}
+.login_section button , .register_section button {
+  width: 100%;
+  padding: 10px;
+  border-style: none;
+  border-radius: 8px;
+  background: transparent;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+h3{
+  margin-bottom: 25px;
+}
+body {
+  margin: 0;
+  background-color: #00203F; /* full screen */
+}
+.Main_page {
+  max-width: 1200px;
+  margin: 0 auto;     /* equal left & right */
+  padding: 20px;
+  width: 90%;
+
+  background-color: transparent; /* 🔥 important */
+  color: #ADEFD1;
+}
+
+
+/* ================= NAVBAR BASE ================= */
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+/* Top row */
+.nav_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo */
+.logo {
+  color: white;
+  cursor: pointer;
+}
+
+/* Icons container */
+.nav_icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Search */
+nav input {
+  width: 350px;
+  margin: 10px auto 0;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* ================= NOTIFICATION ================= */
+
+.notification_container {
+  position: relative;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Dropdown */
+.notification_dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #1e2a38;
+  padding: 10px;
+  border-radius: 6px;
+  width: 200px;
+  z-index: 100;
+}
+
+/* ================= PROFILE ================= */
+
+.profile_container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile_dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #1e2a38;
+  padding: 10px;
+  border-radius: 6px;
+  width: 150px;
+  z-index: 100;
+}
+
+.profile_dropdown button {
+  margin-top: 5px;
+  width: 100%;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  nav input {
+    width: 250px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  nav {
+    align-items: stretch;
+  }
+
+  .nav_top {
+    justify-content: space-between;
+  }
+
+  nav input {
+    width: 100%;
+  }
+
+  .nav_icons {
+    gap: 10px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+  nav input {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .profile_container {
+    font-size: 16px;
+  }
+}
+
+.main_section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* center vertically */
+  align-items: center;       /* center horizontally */
+  text-align: center;
+  color: white;
+  padding: 20px;
+  .main_section {
+  margin: 40px 0; /* top & bottom spacing */
+}
+}
+
+/* main heading */
+.main_section h1 {
+  font-size: 3.5rem;         /* BIG TEXT */
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.main_section p {
+  max-width: 600px;
+  font-size: 1.2rem;
+  color: #e3e6ea;
+}
+.upload_section {
+  margin: 40px auto;
+  padding: 20px;
+  width: 430px;
+  text-align: center;
+  background: rgba(14, 13, 13, 0.05);
+  border-radius: 10px;
+  color: rgb(235, 225, 225);
+}
+
+.upload_section input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.upload_section button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+.Main_page h2{
+  margin-left: 20px;
+}
+.Main_page {
+  color: white;
+}
+
+/* Upload */
+.upload_section input {
+  display: block;
+  margin: 10px auto;
+}
+
+/* Grid Layout */
+.library_grid {
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ✅ 4 per row */
+  gap: 20px;
+  padding: 20px;
+
+}
+
+
+
+/* Card */
+.note_card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+/* Hover Effect */
+.note_card:hover {
+  transform: scale(1.05);
+}
+
+/* Preview */
+.preview {
+  width: 120px;
+  margin: 10px 0;
+}
+
+/* Links */
+.note_card a {
+  margin: 5px;
+  color: #38bdf8;
+  text-decoration: none;
+}
+@media (max-width: 1024px) {
+  .library_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .library_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile_container {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Profile text */
+.profile_container h5 {
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.profile_container h5:hover {
+  color: #38bdf8;
+}
+
+/* Dropdown */
+.profile_dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  width: 200px;
+
+  /* 🔥 Better UI */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Email */
+.profile_dropdown p {
+  font-size: 14px;
+  word-break: break-all; /* ✅ prevents overflow */
+  color: #e2e8f0;
+  text-align: center;
+}
+
+/* Logout button */
+.profile_dropdown button {
+  width: 100%;
+  background: #ef4444;
+  border: none;
+  padding: 8px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.profile_dropdown button:hover {
+  background: #dc2626;
+}
+
+.notification_container {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification_dropdown {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 10px;
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.notification_container {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+
+/* ================= RESPONSIVE ADDITIONS ================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+  /* Grid → 2 columns */
+  .library_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reduce heading */
+  .main_section h1 {
+    font-size: 2.5rem;
+  }
+
+  /* Navbar input smaller */
+  nav input {
+    width: 250px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  /* Navbar stack */
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  nav input {
+    width: 100%;
+  }
+
+  /* Auth section stack */
+  .auth_container {
+    flex-direction: column;
+    gap: 40px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .login_section,
+  .register_section {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* Upload section fix */
+  .upload_section {
+    width: 100%;
+  }
+
+  /* Reduce heading */
+  .main_section h1 {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+
+
+
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  /* Grid → 1 column */
+  .library_grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Smaller text */
+  .main_section h1 {
+    font-size: 1.6rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  /* Button full width */
+  .Navigate {
+    width: 100%;
+  }
+}
