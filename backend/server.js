@@ -10,7 +10,7 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:5175",
-    "https://your-frontend.vercel.app" // 🔥 add this later
+    "https://edu-share-qbos.vercel.app/" // 🔥 add this later
   ],
   credentials: true
 }))
