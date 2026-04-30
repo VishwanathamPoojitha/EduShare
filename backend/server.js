@@ -6,9 +6,10 @@ require("dotenv").config()
 const app = express()
 
 // Middleware
-app.use(cors({
-  origin: "*"
-}))
+app.use(cors())
+
+// Also handle preflight explicitly (extra safe)
+app.options("*", cors())
 app.use(express.json())
 
 // Static files
