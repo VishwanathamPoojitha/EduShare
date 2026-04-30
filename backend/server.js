@@ -9,9 +9,9 @@ const app = express()
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "http://localhost:5175",
-    "https://edu-share-qbos.vercel.app/" // 🔥 add this later
+    "https://edu-share-a67l.vercel.app"
   ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
 app.use(express.json())
