@@ -18,7 +18,7 @@ const Main = () => {
   const navigate = useNavigate()
   const profileRef = useRef()
 
-  // ✅ Get user
+  // Get user
   useEffect(() => {
     const updateUser = () => {
       const storedUser = JSON.parse(localStorage.getItem("user"))
@@ -31,10 +31,10 @@ const Main = () => {
     return () => window.removeEventListener("userChanged", updateUser)
   }, [])
 
-  // ✅ Fetch ALL notes (GLOBAL)
+  // Fetch notes
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/notes/notes")
+      const res = await fetch("https://edushare-lym0.onrender.com/api/notes")
       const data = await res.json()
       setNotes(data)
     } catch (error) {
@@ -65,7 +65,7 @@ const Main = () => {
     navigate("/")
   }
 
-  // ✅ Upload
+  // Upload
   const handleUpload = async () => {
     if (!title || !file) {
       alert("Please enter title and file")
@@ -77,11 +77,11 @@ const Main = () => {
     const formData = new FormData()
     formData.append("title", title)
     formData.append("file", file)
-    formData.append("userEmail", storedUser.email) 
+    formData.append("userEmail", storedUser.email)
     formData.append("username", storedUser?.username || storedUser?.email)
 
     try {
-      const res = await fetch("http://localhost:5000/api/notes/upload", {
+      const res = await fetch("https://edushare-lym0.onrender.com/api/notes/upload", {
         method: "POST",
         body: formData
       })
@@ -93,7 +93,7 @@ const Main = () => {
         setFile(null)
 
         fetchNotes()
-        fetchNotifications() // 🔥 refresh notifications
+        fetchNotifications()
       } else {
         alert("Upload failed")
       }
@@ -103,7 +103,7 @@ const Main = () => {
     }
   }
 
-  // ✅ DELETE (SECURE)
+  // DELETE
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete?")
     if (!confirmDelete) return
@@ -111,7 +111,7 @@ const Main = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"))
 
     try {
-      const res = await fetch(`http://localhost:5000/api/notes/delete/${id}`, {
+      const res = await fetch(`https://edushare-lym0.onrender.com/api/notes/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -137,7 +137,7 @@ const Main = () => {
     note.fileName.toLowerCase().includes(search.toLowerCase())
   )
 
-  // 🔔 Notifications
+  // Notifications
   const [notifications, setNotifications] = useState([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [showNotifications, setShowNotifications] = useState(false)
@@ -147,7 +147,7 @@ const Main = () => {
     if (!storedUser) return
 
     try {
-      const res = await fetch(`http://localhost:5000/api/notifications/${storedUser.email}`)
+      const res = await fetch(`https://edushare-lym0.onrender.com/api/notifications/${storedUser.email}`)
       const data = await res.json()
 
       setNotifications(data)
@@ -162,67 +162,65 @@ const Main = () => {
     fetchNotifications()
   }, [])
 
-  console.log(filteredNotes)
-
   return (
     <div className='Main_page'>
 
       {/* Navbar */}
-    <nav>
+      <nav>
 
-  <div className="nav_top">
-    <Link to="/">
-      <h4 style={{ cursor: "pointer", color: "white" }}>🕮</h4>
-    </Link>
+        <div className="nav_top">
+          <Link to="/">
+            <h4 style={{ cursor: "pointer", color: "white" }}>🕮</h4>
+          </Link>
 
-    <div className="nav_icons">
-      <div className="notification_container">
-        <FaBell 
-          size={22} 
-          onClick={() => {
-            setShowNotifications(!showNotifications)
-            setUnreadCount(0)
-          }}
+          <div className="nav_icons">
+            <div className="notification_container">
+              <FaBell 
+                size={22} 
+                onClick={() => {
+                  setShowNotifications(!showNotifications)
+                  setUnreadCount(0)
+                }}
+              />
+
+              {unreadCount > 0 && (
+                <span className="badge">{unreadCount}</span>
+              )}
+
+              {showNotifications && (
+                <div className="notification_dropdown">
+                  {notifications.length === 0 ? (
+                    <p>No notifications</p>
+                  ) : (
+                    notifications.map((n, i) => (
+                      <p key={i}>{n.message}</p>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div className="profile_container" ref={profileRef}>
+              <h5 onClick={() => setShowProfile(!showProfile)}>👤</h5>
+
+              {showProfile && (
+                <div className="profile_dropdown">
+                  <p>{user?.email || "user@gmail.com"}</p>
+                  <button onClick={handleLogout}>Logout</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <input 
+          type="search" 
+          placeholder="🔎" 
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
 
-        {unreadCount > 0 && (
-          <span className="badge">{unreadCount}</span>
-        )}
-
-        {showNotifications && (
-          <div className="notification_dropdown">
-            {notifications.length === 0 ? (
-              <p>No notifications</p>
-            ) : (
-              notifications.map((n, i) => (
-                <p key={i}>{n.message}</p>
-              ))
-            )}
-          </div>
-        )}
-      </div>
-
-      <div className="profile_container" ref={profileRef}>
-        <h5 onClick={() => setShowProfile(!showProfile)}>👤</h5>
-
-        {showProfile && (
-          <div className="profile_dropdown">
-            <p>{user?.email || "user@gmail.com"}</p>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
-
-  <input 
-    type="search" 
-    placeholder="🔎" 
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-
-</nav>
+      </nav>
 
       {/* Main Section */}
       <div className="main_section">
@@ -272,14 +270,13 @@ const Main = () => {
 
                 <h4>{note.title}</h4>
 
-                {/* 🔥 NEW */}
                 <p>
-  Uploaded by: {note.username || note.userEmail || "User"}
-</p>
+                  Uploaded by: {note.username || note.userEmail || "User"}
+                </p>
 
                 {note.fileType.startsWith("image") ? (
                   <img 
-                    src={`http://localhost:5000/${note.filePath}`} 
+                    src={`https://edushare-lym0.onrender.com/${note.filePath}`} 
                     alt="" 
                     className="preview" 
                   />
@@ -290,7 +287,7 @@ const Main = () => {
                 <p>{note.fileName}</p>
 
                 <a 
-                  href={`http://localhost:5000/${note.filePath}`} 
+                  href={`https://edushare-lym0.onrender.com/${note.filePath}`} 
                   target="_blank" 
                   rel="noreferrer"
                 >
@@ -300,7 +297,7 @@ const Main = () => {
                 {" | "}
 
                 <a 
-                  href={`http://localhost:5000/${note.filePath}`} 
+                  href={`https://edushare-lym0.onrender.com/${note.filePath}`} 
                   download
                 >
                   Download
@@ -308,7 +305,6 @@ const Main = () => {
 
                 <br /><br />
 
-                {/* 🔥 OWNER ONLY DELETE */}
                 {user?.email === note.userEmail && (
                   <button onClick={() => handleDelete(note._id)}>
                     Delete
@@ -325,5 +321,6 @@ const Main = () => {
     </div>
   )
 }
+
 
 export default Main
