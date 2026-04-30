@@ -6,14 +6,9 @@ require("dotenv").config()
 const app = express()
 
 // Middleware
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://edu-share-3yri.vercel.app"
-]
-
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || origin.includes("vercel.app") || origin.includes("localhost")) {
       callback(null, true)
     } else {
       callback(new Error("Not allowed by CORS"))
